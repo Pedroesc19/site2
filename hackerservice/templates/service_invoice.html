@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Step 3 – {{ service.name }}{% endblock %}
+{% set step = 'invoice' %}
+{% block content %}
+<section class="invoice-section">
+  <h2>Step 3: Pay Now for {{ service.name }}</h2>
+  <p>Send exactly <strong id="amount">{{ amount_crypto }} {{ crypto }}</strong> to:</p>
+  <pre id="address">{{ address }}</pre>
+  <button onclick="copyText('address')" class="btn-secondary">Copy Address</button>
+  <button onclick="copyText('amount')" class="btn-secondary">Copy Amount</button>
+  <p>Or scan this:</p>
+  <img src="{{ qr }}" alt="{{ crypto }} QR code" style="max-width:300px;">
+  <p><a href="{{ url_for('services.service_payment', slug=service.slug, usd=usd) }}">
+     ← Back to Payment Options
+  </a></p>
+</section>
+{% endblock %}
+

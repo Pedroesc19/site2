@@ -1,0 +1,106 @@
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #2c3e50;
+  background: #f4f4f4;
+}
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1a1a1a;
+  color: #fff;
+  padding: 1rem 2rem;
+}
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.main-nav a {
+  margin-left: 1rem;
+  color: #fff;
+  text-decoration: none;
+}
+.hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #2c3e50;
+  color: #ecf0f1;
+}
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.btn-primary {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #e74c3c;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+.service-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.service-card h2 {
+  margin-top: 0;
+}
+.price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #e74c3c;
+}
+.btn-secondary {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #3498db;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+.faq-section, .contact-section {
+  background: #fff;
+  padding: 2rem;
+  margin: 2rem;
+  border-radius: 8px;
+}
+.site-footer {
+  background: #1a1a1a;
+  color: #ccc;
+  text-align: center;
+  padding: 1rem;
+}
+.footer-links a {
+  color: #ccc;
+  text-decoration: none;
+  margin: 0 0.5rem;
+}
+.footer-links {
+  margin-bottom: 0.5rem;
+}
+
+.progress-container {
+  width: 100%;
+  background: #eee;
+  height: 6px;
+  margin-bottom: 1rem;
+}
+.progress-bar {
+  width: 0;
+  height: 6px;
+  background: #e74c3c;
+  transition: width 0.3s ease;
+}
+

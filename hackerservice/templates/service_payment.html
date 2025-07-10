@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Step 2 – {{ service.name }}{% endblock %}
+{% set step = 'method' %}
+{% block content %}
+<section class="order-section">
+  <h2>Step 2: Choose Payment for {{ service.name }}</h2>
+  <p>Total due: ${{ usd }}</p>
+  <form method="post">
+    <label><input type="radio" name="method" value="xmr" required>
+      Monero (<span id="xmr_amt">{{ xmr_amt }}</span> XMR)
+    </label><br>
+    <label><input type="radio" name="method" value="btc">
+      Bitcoin (<span id="btc_amt">{{ btc_amt }}</span> BTC)
+    </label><br><br>
+    <button class="btn-primary" type="submit">Generate Address</button>
+  </form>
+  <p><a href="{{ url_for('services.service_detail', slug=service.slug) }}">
+     ← Back to {{ service.name }}
+  </a></p>
+</section>
+
+<script>
+  const USD = {{ usd }};
+  async function updateRates() {
+    try {
+      const resp = await fetch(`/rates?usd=${USD}`);
+      const data = await resp.json();
+      if (data.xmr_amt) document.getElementById('xmr_amt').innerText = data.xmr_amt;
+      if (data.btc_amt) document.getElementById('btc_amt').innerText = data.btc_amt;
+    } catch (e) { console.error(e) }
+  }
+  setInterval(updateRates, 30000);
+  document.addEventListener('DOMContentLoaded', updateRates);
+</script>
+{% endblock %}
+

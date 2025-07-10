@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Step 1 – {{ service.name }}{% endblock %}
+{% set step = 'select' %}
+{% block content %}
+<section class="order-section">
+  <h2>Step 1: {{ service.name }} & Verify</h2>
+  <p>{{ service.pitch }}</p>
+  <form method="post">
+    <img src="{{ captcha_img }}" alt="captcha"><br><br>
+    <label>Enter CAPTCHA:<br>
+      <input type="text" name="captcha" required>
+    </label><br><br>
+    <button type="submit" class="btn-primary">Continue</button>
+  </form>
+  <p><a href="{{ url_for('services.list_services') }}">← Back to Services</a></p>
+</section>
+{% endblock %}
+

@@ -1,0 +1,26 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+
+# IDE / editor configs
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+
+# Secret configuration
+/run/secretcfg/
+.env
+
+# Local SQLite
+*.sqlite3
+
+# Logs
+*.log
+
+# Optionally ignore migration versions if you track only folder
+#migrations/versions/*.py

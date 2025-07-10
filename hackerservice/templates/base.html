@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}HackerService{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body data-step="{{ step or '' }}">
+  <header class="site-header">
+    <div class="logo">HackerService</div>
+    <nav>
+      <a href="{{ url_for('services.list_services') }}">Services</a>
+    </nav>
+  </header>
+
+  <!-- Progress bar -->
+  <div class="progress-container">
+    <div id="progress-bar" class="progress-bar"></div>
+  </div>
+
+  {% block content %}{% endblock %}
+
+  <footer class="site-footer">
+    &copy; 2025 HackerService
+  </footer>
+
+  <!-- Copy-to-Clipboard & Progress JS -->
+  <script>
+    function copyText(id) {
+      const text = document.getElementById(id).innerText.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Copied to clipboard!');
+      });
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const step = document.body.getAttribute('data-step');
+      const bar = document.getElementById('progress-bar');
+      const steps = ['select','method','invoice'];
+      const idx = steps.indexOf(step);
+      if (bar && idx >= 0) {
+        bar.style.width = `${((idx+1)/steps.length)*100}%`;
+      }
+    });
+  </script>
+</body>
+</html>
