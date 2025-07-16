@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+<section class="content-section">
 <h2 class="headline">Affiliate Panel — {{ affiliate.display_name }}</h2>
 
 <div class="profile">
@@ -49,5 +50,6 @@
     <tr><td>${{ c.usd_amount }}</td><td>{{ c.paid_ts.date() }}</td></tr>
   {% else %}<tr><td colspan=2>No payouts yet</td></tr>{% endfor %}
 </table>
+</section>
 {% endblock %}
 

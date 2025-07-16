@@ -31,3 +31,6 @@
 .dashboard-actions {
   margin-top: 1.5rem;
 }
+.dashboard-actions a {
+  margin-right: 0.5rem;
+}

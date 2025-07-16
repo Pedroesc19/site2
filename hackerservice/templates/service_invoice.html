@@ -2,7 +2,7 @@
 {% block title %}Step 3 – {{ service.name }}{% endblock %}
 {% set step = 'invoice' %}
 {% block content %}
-<section class="invoice-section">
+<section class="content-section invoice-section">
 
   {# Show savings notice if a code was applied #}
   {% if commission_usd and commission_usd > 0 %}
