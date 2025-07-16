@@ -150,3 +150,118 @@ label {
   clip: rect(0 0 0 0);
   border: 0;
 }
+
+.trust-bar {
+  display: flex;
+  justify-content: space-around;
+  background: #3498db;
+  color: #fff;
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin: 1rem 0 2rem;
+  font-weight: bold;
+  flex-wrap: wrap;
+}
+
+.badge-hot {
+  display: inline-block;
+  background: #e74c3c;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.discount {
+  background: #2ecc71;
+  color: #fff;
+  padding: 0.2rem 0.4rem;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  margin-left: 0.5rem;
+}
+
+.rating-stars {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+.rating-stars .stars {
+  color: #f1c40f;
+  margin-right: 0.5rem;
+}
+
+.guarantee-bar {
+  background: #f9f9f9;
+  padding: 1rem;
+  text-align: center;
+  border-top: 2px solid #3498db;
+  margin-top: 2rem;
+  border-radius: 8px;
+}
+
+.service-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.trust-bar {
+  display: flex;
+  justify-content: space-around;
+  background: #3498db;
+  color: #fff;
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin: 1rem 0 2rem;
+  font-weight: bold;
+  flex-wrap: wrap;
+}
+
+.service-details {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.service-info {
+  flex: 1;
+}
+
+.rating-stars {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+.rating-stars .stars {
+  color: #f1c40f;
+  margin-right: 0.5rem;
+}
+
+.limited-offer {
+  color: #e74c3c;
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+.guarantee-box {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-left: 4px solid #3498db;
+  margin: 2rem 0;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.order-form {
+  margin-top: 1rem;
+}
+
+.page-links {
+  margin-top: 2rem;
+}
+
