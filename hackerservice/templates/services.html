@@ -1,38 +1,22 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>HackerService — Services</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
-</head>
-<body>
-  <header class="site-header">
-    <div class="logo">HackerService</div>
-    <nav class="main-nav">
-      <a href="{{ url_for('services.list_services') }}">Services</a>
-      <a href="{{ url_for('pages.about') }}">About</a>
-      <a href="{{ url_for('pages.contact') }}">Contact</a>
-    </nav>
-  </header>
-
-  {% for category, items in grouped.items() %}
-    <h2 class="cat-header">{{ category }}</h2>
-    <div class="service-grid">
-      {% for s in items %}
-        <article class="service-card">
-          <h3>{{ s.name }}</h3>
-          <p class="price">{{ s.price }}</p>
-          <p>{{ s.pitch }}</p>
-          <p class="coins">Coins: {{ s.coins }}</p>
-          <a class="btn-secondary"
-             href="{{ url_for('services.service_detail', slug=s.slug) }}">
-             Details / Buy
-          </a>
-        </article>
-      {% endfor %}
-    </div>
-  {% endfor %}
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Services — HackerService{% endblock %}
+{% block content %}
+<h1 class="headline">Available Services</h1>
+{% for category, items in grouped.items() %}
+  <h2 class="cat-header">{{ category }}</h2>
+  <div class="service-grid">
+    {% for s in items %}
+      <article class="service-card">
+        <h3>{{ s.name }}</h3>
+        <p class="price">{{ s.price }}</p>
+        <p>{{ s.pitch }}</p>
+        <p class="coins">Coins: {{ s.coins }}</p>
+        <a class="btn-secondary"
+           href="{{ url_for('services.service_detail', slug=s.slug) }}">
+           Details / Buy
+        </a>
+      </article>
+    {% endfor %}
+  </div>
+{% endfor %}
+{% endblock %}
