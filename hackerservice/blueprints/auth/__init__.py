@@ -7,6 +7,7 @@ from werkzeug.security import check_password_hash
 from datetime import datetime
 from hackerservice.models import User
 from hackerservice.extensions import login  # your LoginManager
+from hackerservice.services.captcha import new_captcha, validate
 
 bp = Blueprint("auth", __name__, template_folder="../templates")
 
@@ -48,25 +49,25 @@ def login_view():
             return redirect(url_for("affiliate_portal.dashboard"))
 
     if request.method == "POST":
-        username = request.form["username"]
-        pwd = request.form["password"]
-        user = User.query.filter_by(username=username).first()
-        if user and check_password_hash(user.password_hash, pwd):
-            login_user(user)
-            # Mark session permanent & set last_activity
-            session.permanent = True
-            session["last_activity"] = datetime.utcnow().timestamp()
-            flash("Logged in", "success")
+        if not validate(request.form.get("captcha", "")):
+            flash("Captcha incorrect", "error")
+        else:
+            username = request.form["username"]
+            pwd = request.form["password"]
+            user = User.query.filter_by(username=username).first()
+            if user and check_password_hash(user.password_hash, pwd):
+                login_user(user)
+                session.permanent = True
+                session["last_activity"] = datetime.utcnow().timestamp()
+                flash("Logged in", "success")
+                if user.role == "admin":
+                    return redirect(url_for("admin.index"))
+                else:
+                    return redirect(url_for("affiliate_portal.dashboard"))
 
-            # Redirect based on role
-            if user.role == "admin":
-                return redirect(url_for("admin.index"))
-            else:
-                return redirect(url_for("affiliate_portal.dashboard"))
+            flash("Bad credentials", "error")
 
-        flash("Bad credentials", "error")
-
-    return render_template("login.html")
+    return render_template("login.html", captcha_img=new_captcha())
 
 
 @bp.route("/logout")

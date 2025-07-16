@@ -9,7 +9,6 @@ from hackerservice.adapters.monero_rpc import create_xmr_subaddress
 from hackerservice.adapters.bitcoin_hd import create_btc_address
 from hackerservice.services.pricing import fetch_xmr_usd_rate, fetch_btc_usd_rate
 from hackerservice.services.qr import generate_monero_qr, generate_qr_data_uri
-from hackerservice.services.captcha import new_captcha, validate
 from hackerservice.extensions import db
 from hackerservice.models import Order, Affiliate
 
@@ -207,21 +206,22 @@ def safe_get_rates(usd):
 def list_services():
     return render_template('services.html', grouped=grouped_services())
 
-@bp.route('/service/<slug>', methods=['GET','POST'])
+@bp.route('/service/<slug>', methods=['GET', 'POST'])
 def service_detail(slug):
     svc = next((s for s in services if s['slug'] == slug), None)
     if not svc:
         flash('Service not found.', 'error')
         return redirect(url_for('services.list_services'))
+
     if request.method == 'POST':
-        if not validate(request.form.get('captcha','')):
-            flash('Captcha incorrect.', 'error')
-        else:
-            return redirect(url_for('services.service_payment',
-                                     slug=slug, usd=svc['price_usd']))
-    return render_template('service_detail.html',
-                           service=svc,
-                           captcha_img=new_captcha())
+        # Previously this step required a CAPTCHA challenge. The
+        # front-end no longer includes it, so simply continue to
+        # the payment step on POST.
+        return redirect(
+            url_for('services.service_payment', slug=slug, usd=svc['price_usd'])
+        )
+
+    return render_template('service_detail.html', service=svc)
 
 @bp.route('/service/<slug>/pay', methods=['GET', 'POST'])
 def service_payment(slug):
