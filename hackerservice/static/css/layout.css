@@ -78,6 +78,30 @@ body {
   text-decoration: none;
   margin: 0 0.5rem;
 }
+
+/* Flash message styles */
+.flashes {
+  max-width: 960px;
+  margin: 1rem auto;
+  padding: 0 1rem;
+}
+.flash {
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+}
+.flash.error {
+  background: #ffdddd;
+  color: #a00;
+}
+.flash.success {
+  background: #ddffdd;
+  color: #0a0;
+}
+.flash.info {
+  background: #ddeaff;
+  color: #005;
+}
 .footer-links {
   margin-bottom: 0.5rem;
 }
