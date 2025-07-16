@@ -1,10 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Login</h2>
-<form method="post">
-  <label>User <input name="username"></label><br>
-  <label>Pass <input name="password" type="password"></label><br><br>
+<h2>Account Login</h2>
+<form method="post" class="login-form">
+  <label>
+    Username
+    <input name="username" placeholder="Your username" required>
+  </label>
+  <label>
+    Password
+    <input name="password" type="password" placeholder="Your password" required>
+  </label>
   <button class="btn-primary" type="submit">Login</button>
 </form>
+<p>If you do not yet have credentials please contact an administrator.</p>
 {% endblock %}
 

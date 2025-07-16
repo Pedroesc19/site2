@@ -23,6 +23,10 @@ body {
   font-size: 1.5rem;
   font-weight: bold;
 }
+.tagline {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
 .main-nav a {
   margin-left: 1rem;
   color: #fff;
@@ -43,6 +47,10 @@ body {
   color: #ccc;
   text-align: center;
   padding: 1rem;
+}
+.footer-note {
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
 }
 .footer-links a {
   color: #ccc;
