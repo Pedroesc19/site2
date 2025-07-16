@@ -13,7 +13,6 @@ Flask-Admin==1.6.0
 requests>=2.0
 qrcode[pil]>=7.0
 Pillow>=9.0
-captcha>=0.4
 python-dotenv==1.0.1
 
 python-bitcoinrpc>=1.0.0
