@@ -4,6 +4,13 @@
 {% block content %}
 <section class="order-section">
   <h2>Step 1: {{ service.name }} & Verify</h2>
+  <img src="{{ url_for('static', filename='img/' + service.image) }}" alt="{{ service.name }}" class="service-img" style="max-width:300px;">
+  <p class="price">Rating: {{ '★' * (service.rating|int) }}{{ '☆' * (5 - (service.rating|int)) }} ({{ service.rating }})</p>
+  <ul>
+    {% for feat in service.features %}
+      <li>{{ feat }}</li>
+    {% endfor %}
+  </ul>
   <p>{{ service.pitch }}</p>
   <p>Please complete the CAPTCHA below to confirm you are a real user.</p>
   <form method="post">
@@ -13,6 +20,15 @@
     <button type="submit" class="btn-primary">Continue</button>
   </form>
   <p><a href="{{ url_for('services.list_services') }}">← Back to Services</a></p>
+  <p><a href="#" onclick="navigator.clipboard.writeText(window.location.href);alert('Link copied');return false;">Share this service</a></p>
+  <section class="reviews">
+    <h3>Reviews</h3>
+    <ul>
+      {% for r in service.reviews %}
+        <li><strong>{{ r.user }}</strong>: {{ r.text }}</li>
+      {% endfor %}
+    </ul>
+  </section>
 </section>
 {% endblock %}
 
