@@ -12,11 +12,7 @@
     {% endfor %}
   </ul>
   <p>{{ service.pitch }}</p>
-  <p>Please complete the CAPTCHA below to confirm you are a real user.</p>
   <form method="post">
-    <img src="{{ captcha_img }}" alt="CAPTCHA challenge" width="200" height="80"><br><br>
-    <label for="captcha-input">Enter CAPTCHA:</label><br>
-    <input id="captcha-input" type="text" name="captcha" required><br><br>
     <button type="submit" class="btn-primary">Continue</button>
   </form>
   <p><a href="{{ url_for('services.list_services') }}">← Back to Services</a></p>
