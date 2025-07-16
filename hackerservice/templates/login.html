@@ -7,6 +7,9 @@
   <input id="login-username" name="username" placeholder="Your username" required>
   <label for="login-password">Password</label>
   <input id="login-password" name="password" type="password" placeholder="Your password" required>
+  <img src="{{ captcha_img }}" alt="CAPTCHA challenge" width="200" height="80"><br><br>
+  <label for="captcha-input">Enter CAPTCHA:</label>
+  <input id="captcha-input" name="captcha" required>
   <button class="btn-primary" type="submit">Login</button>
 </form>
 <p>If you do not yet have credentials please contact an administrator.</p>
