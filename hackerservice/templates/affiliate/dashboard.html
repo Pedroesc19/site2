@@ -37,7 +37,11 @@
 
 <h3>Unpaid Commissions</h3>
 <table>
-  <tr><th>Order ID</th><th>USD</th><th>Date</th></tr>
+  <tr>
+    <th scope="col">Order ID</th>
+    <th scope="col">USD</th>
+    <th scope="col">Date</th>
+  </tr>
   {% for c in unpaid %}
     <tr><td>{{ c.order_id }}</td><td>${{ c.usd_amount }}</td><td>{{ c.created_ts.date() }}</td></tr>
   {% else %}<tr><td colspan=3>None :)</td></tr>{% endfor %}
@@ -45,7 +49,10 @@
 
 <h3>Recent Payouts</h3>
 <table>
-  <tr><th>USD</th><th>Date</th></tr>
+  <tr>
+    <th scope="col">USD</th>
+    <th scope="col">Date</th>
+  </tr>
   {% for c in paid %}
     <tr><td>${{ c.usd_amount }}</td><td>{{ c.paid_ts.date() }}</td></tr>
   {% else %}<tr><td colspan=2>No payouts yet</td></tr>{% endfor %}

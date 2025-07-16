@@ -8,21 +8,22 @@
   <p>Select your preferred cryptocurrency below. Rates refresh automatically.</p>
 
   <form method="post">
-    <label>
-      Promo / Affiliate Code:
-      <input type="text" name="promo_code"
-             placeholder="Optional"
-             value="{{ request.form.promo_code or '' }}">
-    </label><br><br>
+    <label for="promo-code">Promo / Affiliate Code:</label>
+    <input id="promo-code" type="text" name="promo_code"
+           placeholder="Optional"
+           value="{{ request.form.promo_code or '' }}"><br><br>
 
-    <label>
-      <input type="radio" name="method" value="xmr" required>
-      Monero (<span id="xmr_amt">{{ xmr_amt }}</span> XMR)
-    </label><br>
-    <label>
-      <input type="radio" name="method" value="btc">
-      Bitcoin (<span id="btc_amt">{{ btc_amt }}</span> BTC)
-    </label><br><br>
+    <fieldset>
+      <legend class="visually-hidden">Cryptocurrency method</legend>
+      <label for="method-xmr">
+        <input id="method-xmr" type="radio" name="method" value="xmr" required>
+        Monero (<span id="xmr_amt">{{ xmr_amt }}</span> XMR)
+      </label><br>
+      <label for="method-btc">
+        <input id="method-btc" type="radio" name="method" value="btc">
+        Bitcoin (<span id="btc_amt">{{ btc_amt }}</span> BTC)
+      </label>
+    </fieldset><br>
 
     <button class="btn-primary" type="submit">Generate Address</button>
   </form>

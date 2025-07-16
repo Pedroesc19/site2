@@ -6,6 +6,20 @@ body {
   background: #f4f4f4;
 }
 
+/* Skip link for accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #1a1a1a;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  z-index: 100;
+}
+.skip-link:focus {
+  top: 0;
+}
+
 .container {
   max-width: 960px;
   margin: 0 auto;
@@ -31,6 +45,13 @@ body {
   margin-left: 1rem;
   color: #fff;
   text-decoration: none;
+  position: relative;
+  padding: 0.25rem 0;
+}
+.main-nav a:focus,
+.main-nav a:hover {
+  outline: 2px solid #e74c3c;
+  outline-offset: 2px;
 }
 .hero {
   text-align: center;
@@ -80,5 +101,6 @@ body {
   .main-nav a {
     margin-left: 0;
     margin-bottom: .5rem;
+    padding: 0.25rem 0;
   }
 }
