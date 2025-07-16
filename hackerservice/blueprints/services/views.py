@@ -30,6 +30,13 @@ services = [
         "pitch": "Full takeover of WhatsApp / Instagram in 24–72 h.",
         "price_usd": 15,
         "type": "single",
+        "image": "account_takeover.png",
+        "rating": 4.7,
+        "features": ["Fast delivery", "Private approach", "Support included"],
+        "reviews": [
+            {"user": "Alice", "text": "Worked flawlessly!"},
+            {"user": "Bob", "text": "Great service."}
+        ],
     },
     {
         "category": "Social & Personal",
@@ -40,6 +47,13 @@ services = [
         "pitch": "One-click carrier takeover script + docs.",
         "price_usd": 5000,
         "type": "single",
+        "image": "sim_swap.png",
+        "rating": 4.5,
+        "features": ["Easy to use", "Detailed docs", "Premium exploit"],
+        "reviews": [
+            {"user": "Carol", "text": "Impressive results."},
+            {"user": "Dave", "text": "Worth the price."}
+        ],
     },
     {
         "category": "Social & Personal",
@@ -50,6 +64,13 @@ services = [
         "pitch": "Stealth SIS/LMS grade & exam modification.",
         "price_usd": 200,
         "type": "single",
+        "image": "grade_change.png",
+        "rating": 4.2,
+        "features": ["Trusted experts", "Discrete", "Refund guarantee"],
+        "reviews": [
+            {"user": "Eve", "text": "My grades improved instantly."},
+            {"user": "Frank", "text": "Very professional."}
+        ],
     },
     {
         "category": "Social & Personal",
@@ -60,6 +81,13 @@ services = [
         "pitch": "Deep-dive OSINT plus fake docs & legal spam.",
         "price_usd": 500,
         "type": "single",
+        "image": "doxing.png",
+        "rating": 4.0,
+        "features": ["Comprehensive", "Tailored reports", "Low risk"],
+        "reviews": [
+            {"user": "Grace", "text": "Thorough and effective."},
+            {"user": "Heidi", "text": "Exceeded expectations."}
+        ],
     },
 
     # ── ATTACK TOOLS ─────────────────────────
@@ -72,6 +100,13 @@ services = [
         "pitch": "100 Gbps stresser jobs in minutes via API.",
         "price_usd": 50,
         "type": "single",
+        "image": "ddos_booter.png",
+        "rating": 3.9,
+        "features": ["Powerful API", "Usage stats", "24/7 uptime"],
+        "reviews": [
+            {"user": "Ivan", "text": "Does what it promises."},
+            {"user": "Judy", "text": "Could be faster."}
+        ],
     },
     {
         "category": "Attack Tools",
@@ -82,6 +117,13 @@ services = [
         "pitch": "Locker builder + portal;",
         "price_usd": 100,
         "type": "single",
+        "image": "raas_kit.png",
+        "rating": 3.5,
+        "features": ["Classic ransomware", "Simple UI", "Stable"],
+        "reviews": [
+            {"user": "Kim", "text": "Old but effective."},
+            {"user": "Lee", "text": "Met my needs."}
+        ],
     },
     {
         "category": "Attack Tools",
@@ -92,6 +134,13 @@ services = [
         "pitch": "Fresh malware & fake-shop templates; auto-download.",
         "price_usd": 100,
         "type": "single",
+        "image": "malware_phish_kit.png",
+        "rating": 4.3,
+        "features": ["Regular updates", "Multiple templates", "Easy setup"],
+        "reviews": [
+            {"user": "Mallory", "text": "Lots of options."},
+            {"user": "Niaj", "text": "Setup was simple."}
+        ],
     },
 
     # ── DATA & CREDENTIALS ───────────────────
@@ -104,6 +153,13 @@ services = [
         "pitch": "Names, phones, e-mails — direct link on purchase.",
         "price_usd": 150,
         "type": "single",
+        "image": "coinbase_db.png",
+        "rating": 4.6,
+        "features": ["Verified records", "Immediate download", "CSV format"],
+        "reviews": [
+            {"user": "Olivia", "text": "Data was accurate."},
+            {"user": "Peggy", "text": "Great leak quality."}
+        ],
     },
     {
         "category": "Data Leaks",
@@ -114,6 +170,13 @@ services = [
         "pitch": "EV/OV PFX + passphrase via shell corp.",
         "price_usd": 500,
         "type": "single",
+        "image": "code_sign_cert.png",
+        "rating": 4.1,
+        "features": ["High trust", "Comes with docs", "Unique"],
+        "reviews": [
+            {"user": "Ruth", "text": "Certificate worked great."},
+            {"user": "Sybil", "text": "Exactly as described."}
+        ],
     },
 ]
 
