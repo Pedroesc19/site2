@@ -7,21 +7,18 @@
   <p>Total due: ${{ usd }}</p>
 
   <form method="post">
-    <label>
-      Promo / Affiliate Code:
-      <input type="text" name="promo_code"
-             placeholder="Optional"
-             value="{{ request.form.promo_code or '' }}">
-    </label><br><br>
+    <label>Promo / Affiliate Code:
+      <input type="text" name="promo_code" placeholder="Optional" value="{{ request.form.promo_code or '' }}">
+    </label>
 
     <label>
       <input type="radio" name="method" value="xmr" required>
       Monero (<span id="xmr_amt">{{ xmr_amt }}</span> XMR)
-    </label><br>
+    </label>
     <label>
       <input type="radio" name="method" value="btc">
       Bitcoin (<span id="btc_amt">{{ btc_amt }}</span> BTC)
-    </label><br><br>
+    </label>
 
     <button class="btn-primary" type="submit">Generate Address</button>
   </form>

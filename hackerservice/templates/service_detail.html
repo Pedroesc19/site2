@@ -6,10 +6,10 @@
   <h2>Step 1: {{ service.name }} & Verify</h2>
   <p>{{ service.pitch }}</p>
   <form method="post">
-    <img src="{{ captcha_img }}" alt="captcha"><br><br>
-    <label>Enter CAPTCHA:<br>
+    <img src="{{ captcha_img }}" alt="captcha" style="max-width:150px; display:block; margin-bottom:1rem;">
+    <label>Enter CAPTCHA
       <input type="text" name="captcha" required>
-    </label><br><br>
+    </label>
     <button type="submit" class="btn-primary">Continue</button>
   </form>
   <p><a href="{{ url_for('services.list_services') }}">← Back to Services</a></p>

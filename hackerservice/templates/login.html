@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Login</h2>
-<form method="post">
-  <label>User <input name="username"></label><br>
-  <label>Pass <input name="password" type="password"></label><br><br>
-  <button class="btn-primary" type="submit">Login</button>
-</form>
+<section class="order-section">
+  <h2>Login</h2>
+  <form method="post">
+    <label>User
+      <input name="username">
+    </label>
+    <label>Pass
+      <input name="password" type="password">
+    </label>
+    <button class="btn-primary" type="submit">Login</button>
+  </form>
+</section>
 {% endblock %}
 
