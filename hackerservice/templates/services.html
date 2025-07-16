@@ -1,26 +1,65 @@
 {% extends 'base.html' %}
+
 {% block title %}Services — HackerService{% endblock %}
+
 {% block content %}
 <h1 class="headline">Available Services</h1>
-<p>Select from our catalogue of demonstration offerings below. Prices are listed in USD and converted to cryptocurrency during checkout.</p>
+<p class="subtitle">Choose your perfect service. Instant delivery. Secure crypto payments.</p>
+
+<!-- NEW: global trust signals -->
+<div class="trust-bar">
+  <span>✅ Secure Checkout</span>
+  <span>⏱️ Instant Delivery</span>
+  <span>⭐ Trusted by 5,000+ customers</span>
+</div>
+
 {% for category, items in grouped.items() %}
   <h2 class="cat-header">{{ category }}</h2>
   <div class="service-grid" role="list">
     {% for s in items %}
       <article class="service-card" role="listitem">
         <img src="{{ url_for('static', filename='img/' + s.image) }}" alt="{{ s.name }}" style="max-width:100%;height:auto;">
+
+        <!-- NEW: badge for bestsellers or ratings -->
+        {% if s.rating|int >= 4 %}
+          <span class="badge badge-hot">🔥 Bestseller</span>
+        {% endif %}
+
         <h3>{{ s.name }}</h3>
-        <p class="price">{{ s.price }}</p>
-        <p>Rating: {{ '★' * (s.rating|int) }}{{ '☆' * (5 - (s.rating|int)) }}</p>
-        <p>{{ s.pitch }}</p>
+
+        <!-- CHANGED: emphasized price and discount -->
+        <p class="price">
+          {{ s.price }}
+          {% if s.discount %}
+            <span class="discount">-{{ s.discount }}% off</span>
+          {% endif %}
+        </p>
+
+        <!-- NEW: ratings styled visually -->
+        <p class="rating-stars">
+          <span class="stars">{{ '★' * (s.rating|int) }}{{ '☆' * (5 - (s.rating|int)) }}</span>
+          <span class="rating-number">{{ s.rating }}/5</span>
+        </p>
+
+        <p class="service-pitch">{{ s.pitch }}</p>
+        
         <p class="coins">Coins: {{ s.coins }}</p>
-        <p class="review-snippet">"{{ s.reviews[0].text }}" – {{ s.reviews[0].user }}</p>
-        <a class="btn-secondary"
-           href="{{ url_for('services.service_detail', slug=s.slug) }}">
-           Details / Buy
-        </a>
+        
+        <p class="review-snippet">“{{ s.reviews[0].text }}” — <strong>{{ s.reviews[0].user }}</strong></p>
+        
+        <!-- CHANGED: two buttons for conversion -->
+        <div class="service-actions">
+          <a class="btn-primary" href="{{ url_for('services.service_detail', slug=s.slug) }}">Buy Now</a>
+          <a class="btn-tertiary" href="{{ url_for('services.service_detail', slug=s.slug) }}">View Details</a>
+        </div>
       </article>
     {% endfor %}
   </div>
 {% endfor %}
+
+<!-- NEW: bottom trust section -->
+<div class="guarantee-bar">
+  <p>🔒 100% Privacy & Discretion — Demo platform only. Fast digital delivery guaranteed.</p>
+</div>
 {% endblock %}
+

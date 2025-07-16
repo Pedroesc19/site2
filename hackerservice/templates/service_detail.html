@@ -1,34 +1,87 @@
 {% extends 'base.html' %}
 {% block title %}Step 1 – {{ service.name }}{% endblock %}
 {% set step = 'select' %}
+
 {% block content %}
 <section class="order-section">
-  <h2>Step 1: {{ service.name }} & Verify</h2>
-  <img src="{{ url_for('static', filename='img/' + service.image) }}" alt="{{ service.name }}" class="service-img" style="max-width:300px;">
-  <p class="price">Rating: {{ '★' * (service.rating|int) }}{{ '☆' * (5 - (service.rating|int)) }} ({{ service.rating }})</p>
-  <ul>
-    {% for feat in service.features %}
-      <li>{{ feat }}</li>
-    {% endfor %}
-  </ul>
-  <p>{{ service.pitch }}</p>
-  <p>Please complete the CAPTCHA below to confirm you are a real user.</p>
-  <form method="post">
-    <img src="{{ captcha_img }}" alt="CAPTCHA challenge" width="200" height="80"><br><br>
-    <label for="captcha-input">Enter CAPTCHA:</label><br>
-    <input id="captcha-input" type="text" name="captcha" required><br><br>
+
+  <!-- Headline & trust bar -->
+  <h2>Step 1: Confirm Your Order — {{ service.name }}</h2>
+
+  <div class="trust-bar">
+    <span>✅ Secure Checkout</span>
+    <span>⏱️ Instant Delivery</span>
+    <span>⭐ Trusted by 5,000+ customers</span>
+  </div>
+
+  <!-- Service info block -->
+  <div class="service-details">
+    <div class="service-image">
+      <img src="{{ url_for('static', filename='img/' + service.image) }}"
+           alt="{{ service.name }}"
+           class="service-img"
+           style="max-width:300px;">
+    </div>
+
+    <div class="service-info">
+      <h3>{{ service.name }}</h3>
+
+      <p class="price">
+        {{ service.price }}
+      </p>
+
+      <p class="rating-stars">
+        <span class="stars">{{ '★' * (service.rating|int) }}{{ '☆' * (5 - (service.rating|int)) }}</span>
+        <span class="rating-number">{{ service.rating }}/5</span>
+      </p>
+
+      <ul>
+        {% for feat in service.features %}
+          <li>{{ feat }}</li>
+        {% endfor %}
+      </ul>
+
+      <p class="service-pitch">{{ service.pitch }}</p>
+
+      <!-- NEW: urgency -->
+      {% if service.stock %}
+        <p class="limited-offer">⚡ Only {{ service.stock }} left at this price!</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Order form -->
+  <form method="post" class="order-form">
+    <label for="quantity">Quantity:</label><br>
+    <input id="quantity" name="quantity" type="number" value="1" min="1" style="max-width: 80px;"><br><br>
+
     <button type="submit" class="btn-primary">Continue</button>
   </form>
-  <p><a href="{{ url_for('services.list_services') }}">← Back to Services</a></p>
-  <p><a href="#" onclick="navigator.clipboard.writeText(window.location.href);alert('Link copied');return false;">Share this service</a></p>
+
+  <div class="guarantee-box">
+    🔒 100% Privacy & Discretion — Fast digital delivery guaranteed.
+  </div>
+
+  <!-- Reviews block -->
   <section class="reviews">
-    <h3>Reviews</h3>
-    <ul>
-      {% for r in service.reviews %}
-        <li><strong>{{ r.user }}</strong>: {{ r.text }}</li>
-      {% endfor %}
-    </ul>
+    <h3>Customer Reviews</h3>
+    {% if service.reviews %}
+      <ul>
+        {% for r in service.reviews %}
+          <li><strong>{{ r.user }}</strong>: {{ r.text }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No reviews yet. Be the first to review this service!</p>
+    {% endif %}
   </section>
+
+  <!-- Navigation links -->
+  <div class="page-links">
+    <p><a href="{{ url_for('services.list_services') }}">← Back to Services</a></p>
+    <p><a href="#" onclick="navigator.clipboard.writeText(window.location.href);alert('Link copied');return false;">Share this service</a></p>
+  </div>
+
 </section>
 {% endblock %}
 
