@@ -7,7 +7,7 @@ from werkzeug.security import check_password_hash
 from datetime import datetime
 from hackerservice.models import User
 from hackerservice.extensions import login  # your LoginManager
-from hackerservice.services.captcha import new_captcha, validate
+from hackerservice.services.mathcaptcha import new_captcha, validate
 
 bp = Blueprint("auth", __name__, template_folder="../templates")
 
@@ -67,7 +67,7 @@ def login_view():
 
             flash("Bad credentials", "error")
 
-    return render_template("login.html", captcha_img=new_captcha())
+    return render_template("login.html", captcha_question=new_captcha())
 
 
 @bp.route("/logout")

@@ -2,7 +2,7 @@ from flask import (
     Blueprint, render_template, redirect,
     url_for, request, session, flash
 )
-from hackerservice.services.captcha import new_captcha, validate
+from hackerservice.services.mathcaptcha import new_captcha, validate
 
 bp = Blueprint('pages', __name__)
 
@@ -40,4 +40,4 @@ def captcha():
             session['site_verified'] = True
             return redirect(next_url)
         flash('Captcha incorrect.', 'error')
-    return render_template('captcha.html', captcha_img=new_captcha(), next=next_url)
+    return render_template('captcha.html', captcha_question=new_captcha(), next=next_url)
