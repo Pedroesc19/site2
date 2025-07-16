@@ -14,7 +14,10 @@
 
 <h3>Top Affiliates (lifetime)</h3>
 <table>
-  <tr><th>Name</th><th>USD Earned</th></tr>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">USD Earned</th>
+  </tr>
   {% for name, earned in top_affiliates %}
     <tr><td>{{ name }}</td><td>${{ earned | round(2) }}</td></tr>
   {% else %}

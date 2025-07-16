@@ -5,9 +5,9 @@
 <p>Select from our catalogue of demonstration offerings below. Prices are listed in USD and converted to cryptocurrency during checkout.</p>
 {% for category, items in grouped.items() %}
   <h2 class="cat-header">{{ category }}</h2>
-  <div class="service-grid">
+  <div class="service-grid" role="list">
     {% for s in items %}
-      <article class="service-card">
+      <article class="service-card" role="listitem">
         <h3>{{ s.name }}</h3>
         <p class="price">{{ s.price }}</p>
         <p>{{ s.pitch }}</p>
