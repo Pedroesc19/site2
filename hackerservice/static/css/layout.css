@@ -1,0 +1,70 @@
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #2c3e50;
+  background: #f4f4f4;
+}
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1a1a1a;
+  color: #fff;
+  padding: 1rem 2rem;
+}
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.main-nav a {
+  margin-left: 1rem;
+  color: #fff;
+  text-decoration: none;
+}
+.hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #2c3e50;
+  color: #ecf0f1;
+}
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.site-footer {
+  background: #1a1a1a;
+  color: #ccc;
+  text-align: center;
+  padding: 1rem;
+}
+.footer-links a {
+  color: #ccc;
+  text-decoration: none;
+  margin: 0 0.5rem;
+}
+.footer-links {
+  margin-bottom: 0.5rem;
+}
+.progress-container {
+  width: 100%;
+  background: #eee;
+  height: 6px;
+  margin-bottom: 1rem;
+}
+.progress-bar {
+  width: 0;
+  height: 6px;
+  background: #e74c3c;
+  transition: width 0.3s ease;
+}
+@media (max-width: 600px) {
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .main-nav a {
+    margin-left: 0;
+    margin-bottom: .5rem;
+  }
+}

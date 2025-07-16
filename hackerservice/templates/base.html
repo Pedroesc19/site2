@@ -4,7 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{% block title %}HackerService{% endblock %}</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 </head>
 <body data-step="{{ step or '' }}">
 
@@ -12,6 +14,8 @@
     <div class="logo">HackerService</div>
     <nav class="main-nav">
       <a href="{{ url_for('services.list_services') }}">Services</a>
+      <a href="{{ url_for('pages.about') }}">About</a>
+      <a href="{{ url_for('pages.contact') }}">Contact</a>
       {% if current_user.is_authenticated %}
         {% if current_user.role == 'admin' %}
           <a href="{{ url_for('admin.index') }}">Admin</a>
