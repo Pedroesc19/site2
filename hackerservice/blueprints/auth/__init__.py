@@ -59,6 +59,7 @@ def login_view():
                 login_user(user)
                 session.permanent = True
                 session["last_activity"] = datetime.utcnow().timestamp()
+                session["site_verified"] = True
                 flash("Logged in", "success")
                 if user.role == "admin":
                     return redirect(url_for("admin.index"))
