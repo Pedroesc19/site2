@@ -1,49 +1,84 @@
+"""
+hackerservice.app
+~~~~~~~~~~~~~~~
+Flask application-factory + early dotenv loader.
+"""
+
+from __future__ import annotations
+
 import os
-from pathlib import Path
-from flask import Flask
-from hackerservice.extensions import db, migrate
-
-# Ensure project root is on path for imports
-project_root = Path(__file__).parent.parent
 import sys
-sys.path.insert(0, str(project_root))
+from pathlib import Path
 
-# Configuration classes
-from config.settings import BaseConfig, DevConfig, TestConfig
+from dotenv import load_dotenv
+from flask import Flask
 
-def create_app():
+from hackerservice.extensions import db, migrate, login   # ← login manager added
+
+# --------------------------------------------------------------------------- #
+# ❶  Paths
+# --------------------------------------------------------------------------- #
+app_dir   = Path(__file__).resolve().parent           # …/hackerservice/hackerservice/app
+pkg_root  = app_dir.parent                            # …/hackerservice/hackerservice
+proj_root = pkg_root.parent                           # …/hackerservice  (outer project)
+
+# --------------------------------------------------------------------------- #
+# ❷  Load .env (outer root) BEFORE anything reads os.getenv
+# --------------------------------------------------------------------------- #
+load_dotenv(proj_root / ".env")                       # silently ignored if file absent
+
+# --------------------------------------------------------------------------- #
+# ❸  Ensure outer root on import path (so `config`, etc. resolve cleanly)
+# --------------------------------------------------------------------------- #
+sys.path.insert(0, str(proj_root))
+
+# Import config AFTER .env has been processed
+from config.settings import BaseConfig, DevConfig, TestConfig  # noqa: E402
+
+# --------------------------------------------------------------------------- #
+# ❹  Factory
+# --------------------------------------------------------------------------- #
+def create_app() -> Flask:
     """
-    Application factory: creates and configures the Flask app.
-    Chooses configuration based on FLASK_CONFIG env var.
-    Registers extensions and blueprints.
-    """
-    # Select config
-    config_name = os.getenv("FLASK_CONFIG", "DevConfig")
-    config_module = __import__("config.settings", fromlist=[config_name])
-    config_obj = getattr(config_module, config_name)
+    Application-factory.
 
-    # Instantiate app with correct template/static folders
+    • Picks settings via ``FLASK_CONFIG`` env-var (default: ``DevConfig``).
+    • Initialises extensions (SQLAlchemy, Alembic, LoginManager).
+    • Registers core, admin, auth & affiliate blueprints.
+    """
+    cfg_name   = os.getenv("FLASK_CONFIG", "DevConfig")
+    cfg_module = __import__("config.settings", fromlist=[cfg_name])
+    cfg_obj    = getattr(cfg_module, cfg_name)
+
     app = Flask(
         __name__,
-        template_folder=str(project_root / "templates"),
-        static_folder=str(project_root / "static"),
+        template_folder=str(pkg_root / "templates"),  # ← inner templates/
+        static_folder=str(pkg_root / "static"),       # ← inner static/
     )
-    app.config.from_object(config_obj)
+    app.config.from_object(cfg_obj)
 
-    # Initialize Flask extensions
+    # ── Extensions ────────────────────────────────────────────────────────
     db.init_app(app)
     migrate.init_app(app, db)
+    login.init_app(app)                 # <— NEW: login manager
 
-    # Register blueprints
-    from hackerservice.blueprints import register_blueprints
+    # ── Core blueprints (services + payments) ─────────────────────────────
+    from hackerservice.blueprints import register_blueprints  # noqa: WPS433,E402
     register_blueprints(app)
 
-    # Future blueprints:
-    # from app.routes.payments import bp as payments_bp
-    # app.register_blueprint(payments_bp, url_prefix='/payments')
-    #
-    # from app.routes.admin import bp as admin_bp
-    # app.register_blueprint(admin_bp, url_prefix='/admin')
+    # ── Auth / Affiliate / Admin portals ─────────────────────────────────
+    from hackerservice.blueprints.auth      import bp as auth_bp          # noqa: E402
+    from hackerservice.blueprints.affiliate import bp as affiliate_bp     # noqa: E402
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(affiliate_bp)
+
+    # Flask-Admin init (secured inside)
+    from hackerservice.blueprints.admin import init_admin                 # noqa: E402
+    init_admin(app)
 
     return app
+
+
+# gunicorn entry-point:  ``gunicorn 'hackerservice.app:create_app()'``
+app = create_app()
 

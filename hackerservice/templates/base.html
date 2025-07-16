@@ -7,10 +7,21 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body data-step="{{ step or '' }}">
+
   <header class="site-header">
     <div class="logo">HackerService</div>
-    <nav>
+    <nav class="main-nav">
       <a href="{{ url_for('services.list_services') }}">Services</a>
+      {% if current_user.is_authenticated %}
+        {% if current_user.role == 'admin' %}
+          <a href="{{ url_for('admin.index') }}">Admin</a>
+        {% elif current_user.role == 'affiliate' %}
+          <a href="{{ url_for('affiliate_portal.dashboard') }}">Affiliate</a>
+        {% endif %}
+        <a href="{{ url_for('auth.logout_view') }}">Logout</a>
+      {% else %}
+        <a href="{{ url_for('auth.login_view') }}">Login</a>
+      {% endif %}
     </nav>
   </header>
 
@@ -45,3 +56,4 @@
   </script>
 </body>
 </html>
+

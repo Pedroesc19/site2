@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="headline">Affiliate Panel — {{ affiliate.display_name }}</h2>
+
+<div class="profile">
+  <strong>Username:</strong> {{ current_user.username }}<br>
+  <strong>Commission %:</strong> {{ affiliate.commission_pct }}%
+</div>
+
+
+<section class="metrics-grid">
+  <div class="metric-card">
+    <h3>{{ stats.unpaid_total | round(2) }}</h3><p>USD Unpaid</p>
+  </div>
+  <div class="metric-card">
+    <h3>{{ stats.paid_total | round(2) }}</h3><p>USD Paid Out</p>
+  </div>
+  <div class="metric-card">
+    <h3>{{ stats.tx_count }}</h3><p>Payout Txns</p>
+  </div>
+</section>
+
+<h3>Your Promo Code</h3>
+<p class="code-badge">{{ affiliate.code }}</p>
+
+<h3>Payout Addresses</h3>
+<form method="post" class="payout-form">
+  <label>BTC Address:
+    <input name="btc_address" value="{{ affiliate.btc_address or '' }}" size="46">
+  </label><br>
+  <label>XMR Address:
+    <input name="xmr_address" value="{{ affiliate.xmr_address or '' }}" size="98">
+  </label><br><br>
+  <button class="btn-primary" type="submit">Save</button>
+</form>
+
+<h3>Unpaid Commissions</h3>
+<table>
+  <tr><th>Order ID</th><th>USD</th><th>Date</th></tr>
+  {% for c in unpaid %}
+    <tr><td>{{ c.order_id }}</td><td>${{ c.usd_amount }}</td><td>{{ c.created_ts.date() }}</td></tr>
+  {% else %}<tr><td colspan=3>None :)</td></tr>{% endfor %}
+</table>
+
+<h3>Recent Payouts</h3>
+<table>
+  <tr><th>USD</th><th>Date</th></tr>
+  {% for c in paid %}
+    <tr><td>${{ c.usd_amount }}</td><td>{{ c.paid_ts.date() }}</td></tr>
+  {% else %}<tr><td colspan=2>No payouts yet</td></tr>{% endfor %}
+</table>
+{% endblock %}
+

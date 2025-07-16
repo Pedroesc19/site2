@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+
+<section class="metrics-grid">
+  <div class="metric-card">
+    <h3>${{ total_sales | round(2) }}</h3><p>Total Sales</p>
+  </div>
+  <div class="metric-card">
+    <h3>${{ unpaid_commissions | round(2) }}</h3><p>Unpaid Commissions</p>
+  </div>
+</section>
+
+<h3>Top Affiliates (lifetime)</h3>
+<table>
+  <tr><th>Name</th><th>USD Earned</th></tr>
+  {% for name, earned in top_affiliates %}
+    <tr><td>{{ name }}</td><td>${{ earned | round(2) }}</td></tr>
+  {% else %}
+    <tr><td colspan=2>No data yet</td></tr>
+  {% endfor %}
+</table>
+
+<p style="margin-top:1.5rem">
+  <!-- Create new affiliate -->
+  <a class="btn-primary"
+     href="{{ url_for('affiliates.create_view') }}">
+    + New Affiliate
+  </a>
+
+  <!-- Manage users -->
+  <a class="btn-secondary"
+     href="{{ url_for('users.index_view') }}">
+    Manage Users
+  </a>
+
+  <!-- Open all CRUD tables -->
+  <a class="btn-tertiary"
+     href="{{ url_for('admin.index') }}">
+    CRUD Tables »
+  </a>
+</p>
+{% endblock %}
+
